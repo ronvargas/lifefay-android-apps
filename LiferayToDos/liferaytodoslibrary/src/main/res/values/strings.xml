@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">Liferay ToDos Library</string>
+    <string name="tasks">Tasks</string>
+</resources>

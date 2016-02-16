@@ -1,0 +1,25 @@
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <PreferenceCategory
+        android:title="@string/pref_liferay_title"
+        android:key="pref_key_storage_settings">
+    <EditTextPreference
+        android:capitalize="none"
+        android:defaultValue="@string/pref_default_liferay_server"
+        android:inputType="textUri"
+        android:key="liferay_server"
+        android:maxLines="1"
+        android:selectAllOnFocus="true"
+        android:singleLine="true"
+        android:title="@string/pref_liferay_server_title" />
+
+    <EditTextPreference
+        android:capitalize="none"
+        android:defaultValue="@string/pref_default_company_id"
+        android:inputType="number"
+        android:key="company_id"
+        android:maxLines="1"
+        android:selectAllOnFocus="true"
+        android:singleLine="true"
+        android:title="@string/pref_company_id_title" />
+    </PreferenceCategory>
+</PreferenceScreen>

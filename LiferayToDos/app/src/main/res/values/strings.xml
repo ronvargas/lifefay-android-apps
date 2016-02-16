@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">Liferay To Dos</string>
+    <string name="title_activity_todos_list">Tasks</string>
+    <string name="title_activity_settings">Settings</string>
+    <string name="pref_liferay_title">Liferay</string>
+
+    <!-- Strings related to Settings -->
+    <string name="pref_liferay_server_title">Liferay Server</string>
+    <string name="pref_company_id_title">Company Id</string>
+
+    <string name="pref_default_liferay_server">http://192.168.65.1:8080</string>
+    <string name="pref_default_company_id">20155</string>
+
+
+
+
+</resources>
