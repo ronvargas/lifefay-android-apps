@@ -3,19 +3,21 @@ package com.rivetlogic.mobile.liferaytodos;
 
 import android.annotation.TargetApi;
 import android.content.Context;
-import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.os.Build;
 import android.os.Bundle;
 import android.preference.EditTextPreference;
 import android.preference.Preference;
-import android.preference.PreferenceActivity;
 import android.support.v7.app.ActionBar;
 import android.preference.PreferenceFragment;
 import android.preference.PreferenceManager;
-import android.view.MenuItem;
+
+import com.liferay.mobile.screens.context.LiferayServerContext;
+import com.rivetlogic.mobile.liferaytodos.constants.TodosConstants;
 
 public class SettingsActivity extends AppCompatPreferenceActivity {
+
     /**
      * A preference value change listener that updates the preference's summary
      * to reflect its new value.
@@ -30,6 +32,16 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
             } else {
                 // no other kinds of preferences are being implemented at this point
             }
+
+            SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(preference.getContext());
+            if (preference.getKey().equals(TodosConstants.LIFERAY_SERVER)){
+                LiferayServerContext.setServer(stringValue);
+            } else if (preference.getKey().equals(TodosConstants.COMPANY_ID)) {
+                LiferayServerContext.setCompanyId(new Long(stringValue));
+            }
+
+            /// TODO GROUP ID !!!!!??????
+
             return true;
         }
     };
@@ -58,10 +70,9 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
 
         // Trigger the listener immediately with the preference's
         // current value.
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(preference.getContext());
         sBindPreferenceSummaryToValueListener.onPreferenceChange(preference,
-                PreferenceManager
-                        .getDefaultSharedPreferences(preference.getContext())
-                        .getString(preference.getKey(), ""));
+                prefs.getString(preference.getKey(), ""));
     }
 
     @Override

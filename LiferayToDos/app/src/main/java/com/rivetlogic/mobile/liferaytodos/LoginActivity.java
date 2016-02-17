@@ -15,11 +15,10 @@ import com.liferay.mobile.screens.auth.login.LoginListener;
 import com.liferay.mobile.screens.auth.login.LoginScreenlet;
 import com.liferay.mobile.screens.context.LiferayServerContext;
 import com.liferay.mobile.screens.context.User;
+import com.rivetlogic.mobile.liferaytodos.constants.TodosConstants;
 
 public class LoginActivity extends AppCompatActivity implements LoginListener {
 
-    private final String LOCAL_LIFERAY_SERVER_ADDRESS = "http://192.168.65.1:8080";
-    private final String LOCAL_LIFERAY_COMPANY_ID = "20155";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,11 +34,11 @@ public class LoginActivity extends AppCompatActivity implements LoginListener {
         EditText loginPass = (EditText) findViewById(R.id.liferay_password);
         loginUsername.setText("test@liferay.com");
         loginPass.setText("test");
-        // TODO: remove this section !!!!
+        // TODO: end of testing section !!!!
 
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
-        LiferayServerContext.setServer(prefs.getString("liferay_server", LOCAL_LIFERAY_SERVER_ADDRESS));
-        LiferayServerContext.setCompanyId(new Long(prefs.getString("company_id", LOCAL_LIFERAY_COMPANY_ID)));
+        LiferayServerContext.setServer(prefs.getString(TodosConstants.LIFERAY_SERVER, TodosConstants.LOCAL_LIFERAY_SERVER_ADDRESS));
+        LiferayServerContext.setCompanyId(new Long(prefs.getString(TodosConstants.COMPANY_ID, TodosConstants.LOCAL_LIFERAY_COMPANY_ID)));
 
     }
 
