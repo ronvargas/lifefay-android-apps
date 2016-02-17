@@ -19,27 +19,17 @@ import com.rivetlogic.mobile.liferaytodos.constants.TodosConstants;
 
 public class LoginActivity extends AppCompatActivity implements LoginListener {
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-
         LoginScreenlet loginScreenlet = (LoginScreenlet) findViewById(R.id.login_todos);
         loginScreenlet.setListener(this);
-
-        // TODO: temp to speedup testing
-        EditText loginUsername = (EditText) findViewById(R.id.liferay_login);
-        EditText loginPass = (EditText) findViewById(R.id.liferay_password);
-        loginUsername.setText("test@liferay.com");
-        loginPass.setText("test");
-        // TODO: end of testing section !!!!
 
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
         LiferayServerContext.setServer(prefs.getString(TodosConstants.LIFERAY_SERVER, TodosConstants.LOCAL_LIFERAY_SERVER_ADDRESS));
         LiferayServerContext.setCompanyId(new Long(prefs.getString(TodosConstants.COMPANY_ID, TodosConstants.LOCAL_LIFERAY_COMPANY_ID)));
-
     }
 
     @Override

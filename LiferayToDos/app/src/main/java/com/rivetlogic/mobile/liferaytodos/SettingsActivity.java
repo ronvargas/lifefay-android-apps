@@ -39,9 +39,6 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
             } else if (preference.getKey().equals(TodosConstants.COMPANY_ID)) {
                 LiferayServerContext.setCompanyId(new Long(stringValue));
             }
-
-            /// TODO GROUP ID !!!!!??????
-
             return true;
         }
     };
