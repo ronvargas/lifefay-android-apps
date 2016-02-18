@@ -30,9 +30,10 @@
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:layout_toRightOf="@+id/task_done"
-            android:layout_marginRight="80dp"
-            android:layout_marginBottom="-15sp"
+            android:layout_marginRight="60dp"
+            android:layout_marginBottom="-15dp"
             android:textColor="#000000"
+            android:textSize="14sp"
              />
 
         <TextView
@@ -41,7 +42,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:layout_alignParentRight="true"
-            android:layout_marginBottom="-15sp"
+            android:layout_marginBottom="-15dp"
             android:layout_gravity="end"
             android:textColor="#5680d6"
             android:textSize="10sp"

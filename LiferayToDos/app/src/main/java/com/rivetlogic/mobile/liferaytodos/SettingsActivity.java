@@ -87,8 +87,7 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
             // Show the Up button in the action bar.
-            actionBar.setDisplayHomeAsUpEnabled(true);
-            //TODO:
+            actionBar.setDisplayShowHomeEnabled(false);
         }
     }
 
@@ -117,8 +116,8 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
             super.onCreate(savedInstanceState);
             // Load the preferences from an XML resource
             addPreferencesFromResource(R.xml.preferences);
-            bindPreferenceSummaryToValue(findPreference("liferay_server"));
-            bindPreferenceSummaryToValue(findPreference("company_id"));
+            bindPreferenceSummaryToValue(findPreference(TodosConstants.LIFERAY_SERVER));
+            bindPreferenceSummaryToValue(findPreference(TodosConstants.COMPANY_ID));
         }
     }
 
