@@ -9,6 +9,7 @@ import com.liferay.mobile.android.v62.task.TaskService;
 import com.liferay.mobile.screens.base.interactor.BaseRemoteInteractor;
 import com.liferay.mobile.screens.context.LiferayServerContext;
 import com.liferay.mobile.screens.context.SessionContext;
+import com.rivetlogic.mobile.liferaytodos.constants.TodosConstants;
 import com.rivetlogic.mobile.liferaytodoslibrary.interactor.TodosListener;
 
 /**
@@ -50,9 +51,10 @@ public class TaskByUserIdInteractorImpl
 
     protected TaskService getTaskService() {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
-
-        LiferayServerContext.setServer(prefs.getString("liferay_server", ""));
-        LiferayServerContext.setCompanyId(new Long(prefs.getString("company_id", "")));
+        LiferayServerContext.setServer(prefs.getString(
+                TodosConstants.LIFERAY_SERVER, TodosConstants.LOCAL_LIFERAY_SERVER_ADDRESS));
+        LiferayServerContext.setCompanyId(new Long(prefs.getString(
+                TodosConstants.COMPANY_ID, TodosConstants.LOCAL_LIFERAY_COMPANY_ID)));
         Session session = SessionContext.createSessionFromCurrentSession();
         session.setCallback(new TaskByUserIdCallback(getTargetScreenletId()));
         return new TaskService(session);
