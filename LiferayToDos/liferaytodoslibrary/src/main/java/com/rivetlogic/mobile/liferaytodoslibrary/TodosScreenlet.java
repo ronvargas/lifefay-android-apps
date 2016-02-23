@@ -49,17 +49,21 @@ public class TodosScreenlet extends BaseScreenlet<TodosViewModel, TodosBaseInter
 
     private TodosListener _listener;
     private long _userId;
+    private Context context;
 
     public TodosScreenlet(Context context) {
         super(context);
+        this.context = context;
     }
 
     public TodosScreenlet(Context context, AttributeSet attributes) {
         super(context, attributes);
+        this.context = context;
     }
 
     public TodosScreenlet(Context context, AttributeSet attributes, int defaultStyle) {
         super(context, attributes, defaultStyle);
+        this.context = context;
     }
 
     public void loadToDos() {
@@ -116,7 +120,7 @@ public class TodosScreenlet extends BaseScreenlet<TodosViewModel, TodosBaseInter
     @Override
     protected TodosBaseInteractor createInteractor(String actionName) {
         if (singleInteractor == null) {
-            singleInteractor = new TaskByUserIdInteractorImpl(getScreenletId());
+            singleInteractor = new TaskByUserIdInteractorImpl(getScreenletId(), this.context);
         }
         return singleInteractor;
     }
