@@ -9,12 +9,14 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import com.rivetlogic.mobile.liferaytodoslibrary.TodosScreenlet;
 
 public class TodosListActivity extends AppCompatActivity {
 
     private RecyclerView mRecyclerView;
+    private TextView emptyView;
     //other managers optional:
     // 1column, grid, dynamic: LinearLayoutManager, GridLayoutManager, StaggeredGridLayoutManager
     private LinearLayoutManager mLayoutManager;
@@ -34,6 +36,7 @@ public class TodosListActivity extends AppCompatActivity {
         dropdown.setAdapter(adapter);
         dropdown.setOnItemSelectedListener(new Spinner.OnItemSelectedListener() {
             TodosScreenlet todosScreenlet = (TodosScreenlet) findViewById(R.id.liferay_todos);
+
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 if (position == 0) {
@@ -53,6 +56,8 @@ public class TodosListActivity extends AppCompatActivity {
             }
         });
 
+        emptyView = (TextView)findViewById(R.id.empty_view);
+        emptyView.setVisibility(View.GONE);
         mRecyclerView = (RecyclerView)findViewById(R.id.recycler_view);
         mLayoutManager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(mLayoutManager);

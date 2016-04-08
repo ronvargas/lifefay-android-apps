@@ -44,6 +44,7 @@ public class TodosScreenlet extends BaseScreenlet<TodosViewModel, TodosBaseInter
     private String appliedFilter = FILTER_DUE_TODAY;
     private SwipeRefreshLayout swipeContainer;
     private RecyclerView mRecyclerView;
+    private TextView emptyView;
     private RVAdapter mAdapter;
     private TodosBaseInteractor singleInteractor;
 
@@ -148,6 +149,7 @@ public class TodosScreenlet extends BaseScreenlet<TodosViewModel, TodosBaseInter
     @Override
     protected void onScreenletAttached() {
         // actions after Activity's "onCreate" call
+        emptyView = (TextView) findViewById(R.id.empty_view);
         mRecyclerView = (RecyclerView) findViewById(R.id.recycler_view);
         swipeContainer = (SwipeRefreshLayout) findViewById(R.id.swipeContainer);
 
@@ -191,14 +193,19 @@ public class TodosScreenlet extends BaseScreenlet<TodosViewModel, TodosBaseInter
         }
         groupTasksByDate(jsonArray);
 
-        if (appliedFilter.equals(FILTER_DUE_TODAY)){
-            refreshTasks(todayTasks);
-        } else if (appliedFilter.equals(FILTER_DUE_TOMORROW)){
-            refreshTasks(tomorrowTasks);
-        } else if (appliedFilter.equals(FILTER_FUTURE)){
-            refreshTasks(futureTasks);
-        } else if (appliedFilter.equals(FILTER_PAST_DUE)){
-            refreshTasks(previousTasks);
+        switch (appliedFilter) {
+            case FILTER_DUE_TODAY:
+                refreshTasks(todayTasks);
+                break;
+            case FILTER_DUE_TOMORROW:
+                refreshTasks(tomorrowTasks);
+                break;
+            case FILTER_FUTURE:
+                refreshTasks(futureTasks);
+                break;
+            case FILTER_PAST_DUE:
+                refreshTasks(previousTasks);
+                break;
         }
     }
 
@@ -217,6 +224,14 @@ public class TodosScreenlet extends BaseScreenlet<TodosViewModel, TodosBaseInter
             mAdapter = new RVAdapter(jsonArray, getContext());
         } else {
             mAdapter.setTasks(jsonArray);
+        }
+        if (mAdapter.getItemCount() == 0)
+        {
+            mRecyclerView.setVisibility(View.GONE);
+            emptyView.setVisibility(View.VISIBLE);
+        }else{
+            mRecyclerView.setVisibility(View.VISIBLE);
+            emptyView.setVisibility(View.GONE);
         }
         mRecyclerView.setAdapter(mAdapter);
         mAdapter.notifyDataSetChanged();
