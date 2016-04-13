@@ -1,35 +1,60 @@
 package com.rivetlogic.mobile.liferaytodos;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.NavigationView;
+import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.liferay.mobile.screens.context.SessionContext;
 import com.rivetlogic.mobile.liferaytodoslibrary.TodosScreenlet;
 
 public class TodosListActivity extends AppCompatActivity {
 
+    private DrawerLayout drawerLayout;
     private RecyclerView mRecyclerView;
     private TextView emptyView;
+    private NavigationView navigationView;
     //other managers optional:
     // 1column, grid, dynamic: LinearLayoutManager, GridLayoutManager, StaggeredGridLayoutManager
     private LinearLayoutManager mLayoutManager;
+    private AppCompatActivity currentActivity;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        currentActivity = this;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_todos_list);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeButtonEnabled(true);
+        setupToolbarDropdown();
 
+        navigationView = (NavigationView)findViewById(R.id.navigation);
+        setupNavigationView(toolbar);
+
+        emptyView = (TextView)findViewById(R.id.empty_view);
+        emptyView.setVisibility(View.GONE);
+        mRecyclerView = (RecyclerView)findViewById(R.id.recycler_view);
+        mLayoutManager = new LinearLayoutManager(this);
+        mRecyclerView.setLayoutManager(mLayoutManager);
+    }
+
+    private void setupToolbarDropdown() {
         Spinner dropdown = (Spinner) findViewById(R.id.time_filter_spinner);
         String[] items = new String[]{"Due Today", "Due Tomorrow", "Future", "Past Due"};
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, items);
@@ -55,13 +80,54 @@ public class TodosListActivity extends AppCompatActivity {
                 // no action taken
             }
         });
+    }
 
-        emptyView = (TextView)findViewById(R.id.empty_view);
-        emptyView.setVisibility(View.GONE);
-        mRecyclerView = (RecyclerView)findViewById(R.id.recycler_view);
-        mLayoutManager = new LinearLayoutManager(this);
-        mRecyclerView.setLayoutManager(mLayoutManager);
+    @Override
+    /**
+     * eliminate the back action, to go back to the login must be done using the logout option
+     */
+    public void onBackPressed() {
+        // Do Here what ever you want do on back press;
+    }
 
+    private void setupNavigationView(Toolbar toolbar) {
+        drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+
+        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(MenuItem menuItem) {
+
+                if(menuItem.isChecked()) menuItem.setChecked(false);
+                else menuItem.setChecked(true);
+
+                drawerLayout.closeDrawers();
+
+                switch (menuItem.getItemId()){
+                    case R.id.navigation_list:
+                        //just go back
+                        return true;
+                    //TODO:
+//                    case R.id.navigation_create:
+//                        Toast.makeText(getApplicationContext(),"Create Selected",Toast.LENGTH_SHORT).show();
+//                        return true;
+                    case R.id.navigation_logout:
+                        Toast.makeText(getApplicationContext(),"Logging out",Toast.LENGTH_SHORT).show();
+                        SessionContext.clearSession();
+                        startActivity(new Intent(currentActivity, LoginActivity.class));
+                        return true;
+                    default:
+                        Toast.makeText(getApplicationContext(),"Not a Valid Menu Option",Toast.LENGTH_SHORT).show();
+                        return true;
+
+                }
+            }
+        });
+
+        // Initializing Drawer Layout and ActionBarToggle
+        ActionBarDrawerToggle actionBarDrawerToggle = new ActionBarDrawerToggle(this, drawerLayout,
+                toolbar, R.string.openDrawer, R.string.closeDrawer) ;
+        drawerLayout.setDrawerListener(actionBarDrawerToggle);
+        actionBarDrawerToggle.syncState();
     }
 
 }
