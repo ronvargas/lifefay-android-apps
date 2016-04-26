@@ -18,4 +18,11 @@
     <string name="openDrawer">-</string>
     <string name="closeDrawer">- -</string>
 
+    <string-array name="spinner_filter_items_days">
+        <item>Due Today</item>
+        <item>Due Tomorrow</item>
+        <item>Future</item>
+        <item>Past Due</item>
+    </string-array>
+
 </resources>

@@ -2,6 +2,7 @@ package com.rivetlogic.mobile.liferaytodos;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.ArrayRes;
 import android.support.design.widget.NavigationView;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v4.widget.DrawerLayout;
@@ -38,14 +39,14 @@ public class TodosListActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_todos_list);
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+        Toolbar listToolbar = (Toolbar) findViewById(R.id.list_toolbar);
+        setSupportActionBar(listToolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
         setupToolbarDropdown();
 
         navigationView = (NavigationView)findViewById(R.id.navigation);
-        setupNavigationView(toolbar);
+        setupNavigationView(listToolbar);
 
         emptyView = (TextView)findViewById(R.id.empty_view);
         emptyView.setVisibility(View.GONE);
@@ -56,8 +57,9 @@ public class TodosListActivity extends AppCompatActivity {
 
     private void setupToolbarDropdown() {
         Spinner dropdown = (Spinner) findViewById(R.id.time_filter_spinner);
-        String[] items = new String[]{"Due Today", "Due Tomorrow", "Future", "Past Due"};
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, items);
+        ArrayAdapter adapter = ArrayAdapter.createFromResource(this, R.array.spinner_filter_items_days,
+                R.layout.spinner_item);
+        adapter.setDropDownViewResource(R.layout.spinner_dropdown_item);
         dropdown.setAdapter(adapter);
         dropdown.setOnItemSelectedListener(new Spinner.OnItemSelectedListener() {
             TodosScreenlet todosScreenlet = (TodosScreenlet) findViewById(R.id.liferay_todos);

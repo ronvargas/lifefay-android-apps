@@ -13,21 +13,15 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#EEE"
         android:fitsSystemWindows="true"
         tools:context="com.rivetlogic.mobile.liferaytodos.TodosListActivity">
 
-        <android.support.design.widget.AppBarLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-            <!--android:theme="@style/AppTheme.AppBarOverlay">-->
-
             <android.support.v7.widget.Toolbar
-                android:id="@+id/toolbar"
+                android:id="@+id/list_toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
-                android:background="#5680d6"
-                app:popupTheme="@style/AppTheme"
+                android:theme="@style/ThemeOverlay.AppCompat.Dark"
+                android:background="@color/colorPrimary"
                 android:elevation="4dp">
 
                 <Spinner
@@ -35,12 +29,16 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="end"
+                    android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
                     android:spinnerMode="dropdown" />
             </android.support.v7.widget.Toolbar>
-        </android.support.design.widget.AppBarLayout>
+        <!--SpinnerAppTheme-->
 
         <!-- SCREEN MAIN CONTENT - LIST OF TASKS-->
-        <include layout="@layout/content_todos_list" />
+        <include layout="@layout/content_todos_list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="50dp"/>
 
     </android.support.design.widget.CoordinatorLayout>
 
