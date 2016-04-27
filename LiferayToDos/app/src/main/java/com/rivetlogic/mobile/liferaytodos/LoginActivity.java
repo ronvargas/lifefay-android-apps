@@ -27,6 +27,9 @@ public class LoginActivity extends AppCompatActivity implements LoginListener {
         LoginScreenlet loginScreenlet = (LoginScreenlet) findViewById(R.id.login_todos);
         loginScreenlet.setListener(this);
 
+        Toolbar listToolbar = (Toolbar) findViewById(R.id.login_toolbar);
+        setSupportActionBar(listToolbar);
+
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
         LiferayServerContext.setServer(prefs.getString(TodosConstants.LIFERAY_SERVER, TodosConstants.LOCAL_LIFERAY_SERVER_ADDRESS));
         LiferayServerContext.setCompanyId(new Long(prefs.getString(TodosConstants.COMPANY_ID, TodosConstants.LOCAL_LIFERAY_COMPANY_ID)));
