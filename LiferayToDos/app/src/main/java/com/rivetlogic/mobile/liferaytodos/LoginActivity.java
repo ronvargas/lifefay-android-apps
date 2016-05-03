@@ -9,7 +9,9 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.liferay.mobile.screens.auth.login.LoginListener;
 import com.liferay.mobile.screens.auth.login.LoginScreenlet;
@@ -19,16 +21,19 @@ import com.rivetlogic.mobile.liferaytodos.constants.TodosConstants;
 
 public class LoginActivity extends AppCompatActivity implements LoginListener {
 
+    private TextView loginError;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        LoginScreenlet loginScreenlet = (LoginScreenlet) findViewById(R.id.login_todos);
-        loginScreenlet.setListener(this);
-
         Toolbar listToolbar = (Toolbar) findViewById(R.id.login_toolbar);
         setSupportActionBar(listToolbar);
+        LoginScreenlet loginScreenlet = (LoginScreenlet) findViewById(R.id.login_todos);
+        loginScreenlet.setListener(this);
+        loginError = (TextView) findViewById(R.id.login_error_display);
+        loginError.setVisibility(View.GONE);
 
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
         LiferayServerContext.setServer(prefs.getString(TodosConstants.LIFERAY_SERVER, TodosConstants.LOCAL_LIFERAY_SERVER_ADDRESS));
@@ -37,12 +42,14 @@ public class LoginActivity extends AppCompatActivity implements LoginListener {
 
     @Override
     public void onLoginSuccess(User user) {
+        loginError.setVisibility(View.GONE);
         startActivity(new Intent(this, TodosListActivity.class));
     }
 
     @Override
     public void onLoginFailure(Exception e) {
-
+        loginError.setVisibility(View.VISIBLE);
+        loginError.setText(e.getMessage());
     }
 
     @Override

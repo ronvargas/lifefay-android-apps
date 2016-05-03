@@ -14,6 +14,15 @@
         android:background="@color/colorPrimary"
         android:elevation="4dp"/>
 
+    <TextView
+        android:id="@+id/login_error_display"
+        android:textColor="#EE3333"
+        android:layout_marginTop="94dp"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:layout_below="@+id/login_todos"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
     <com.liferay.mobile.screens.auth.login.LoginScreenlet
         android:id="@+id/login_todos"
         android:layout_width="match_parent"
@@ -21,5 +30,6 @@
         android:layout_centerVertical="true"
         tools:basicAuthMethod="email"
         tools:credentialsStorage="auto" />
+
 
 </RelativeLayout>
