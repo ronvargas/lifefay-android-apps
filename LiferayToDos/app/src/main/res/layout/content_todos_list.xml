@@ -16,6 +16,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/liferay_todos"
-        app:layoutId="@layout/todos_default"/>
+        app:layoutId="@layout/todos_list_layout"/>
 
 </RelativeLayout>

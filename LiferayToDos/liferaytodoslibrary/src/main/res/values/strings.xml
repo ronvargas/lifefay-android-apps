@@ -2,4 +2,5 @@
     <string name="app_name">Liferay ToDos Library</string>
     <string name="tasks">Tasks</string>
     <string name="no_tasks_for_this_period">No tasks for this period</string>
+    <string name="Save">Save</string>
 </resources>

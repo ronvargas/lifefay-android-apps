@@ -2,7 +2,7 @@ package com.rivetlogic.mobile.liferaytodos;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.ArrayRes;
+import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v4.widget.DrawerLayout;
@@ -47,6 +47,15 @@ public class TodosListActivity extends AppCompatActivity {
 
         navigationView = (NavigationView)findViewById(R.id.navigation);
         setupNavigationView(listToolbar);
+
+        FloatingActionButton addTaskButton = (FloatingActionButton) findViewById(R.id.add_task_button);
+        final TodosListActivity container = this;
+        addTaskButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(container, TaskDetailActivity.class));
+            }
+        });
 
         emptyView = (TextView)findViewById(R.id.empty_view);
         emptyView.setVisibility(View.GONE);
@@ -106,12 +115,10 @@ public class TodosListActivity extends AppCompatActivity {
 
                 switch (menuItem.getItemId()){
                     case R.id.navigation_list:
-                        //just go back
                         return true;
-                    //TODO:
-//                    case R.id.navigation_create:
-//                        Toast.makeText(getApplicationContext(),"Create Selected",Toast.LENGTH_SHORT).show();
-//                        return true;
+                    case R.id.navigation_create:
+                        startActivity(new Intent(currentActivity, TaskDetailActivity.class));
+                        return true;
                     case R.id.navigation_logout:
                         Toast.makeText(getApplicationContext(),"Logging out",Toast.LENGTH_SHORT).show();
                         SessionContext.clearSession();

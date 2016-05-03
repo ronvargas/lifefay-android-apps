@@ -6,11 +6,12 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     card_view:cardCornerRadius="3dp"
-    card_view:cardElevation="4dp"
+    card_view:cardElevation="3dp"
+    android:animateLayoutChanges="true"
     card_view:cardUseCompatPadding="true"
-    tools:showIn="@layout/todos_default">
+    tools:showIn="@layout/todos_list_layout">
 
-    <RelativeLayout
+    <RelativeLayout android:id="@+id/task_view_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="5sp">
@@ -20,7 +21,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="top|start"
-            android:clickable="false"
+            android:clickable="true"
             android:layout_marginTop="4dp"
              />
 
@@ -54,5 +55,51 @@
             android:textSize="12sp"
             />
     </RelativeLayout>
+
+    <LinearLayout android:id="@+id/task_edit_layout"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginLeft="5sp">
+
+        <EditText
+            android:id="@+id/task_edit_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="14sp"
+            android:textColor="#000000"
+            />
+
+        <EditText
+            android:id="@+id/task_edit_description"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="0dp"
+            android:textSize="12sp"
+            />
+
+        <DatePicker
+            android:id="@+id/task_edit_date"
+            android:datePickerMode="spinner"
+            android:calendarViewShown="false"
+            android:layout_gravity="center_horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="110sp"
+            />
+
+        <Button android:id="@+id/button_task_save"
+            android:layout_width="50sp"
+            android:layout_height="30sp"
+            android:background="@drawable/default_blue"
+            android:text="@string/Save"
+            android:textStyle="bold"
+            android:textSize="12sp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:textColor="@color/common_signin_btn_dark_text_default"
+            android:onClick="saveTask"
+            />
+</LinearLayout>
 
 </android.support.v7.widget.CardView>

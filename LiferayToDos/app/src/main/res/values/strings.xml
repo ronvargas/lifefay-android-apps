@@ -24,5 +24,6 @@
         <item>Future</item>
         <item>Past Due</item>
     </string-array>
+    <string name="title_activity_task_detail">Task Detail</string>
 
 </resources>

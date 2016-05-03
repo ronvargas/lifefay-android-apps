@@ -12,10 +12,10 @@
             android:icon="@drawable/default_arrow"
             android:title="@string/task_list"/>
 
-        <!--<item-->
-            <!--android:id="@+id/navigation_create"-->
-            <!--android:icon="@drawable/default_arrow"-->
-            <!--android:title="@string/create_task"/>-->
+        <item
+            android:id="@+id/navigation_create"
+            android:icon="@drawable/default_arrow"
+            android:title="@string/create_task"/>
 
     </group>
 
