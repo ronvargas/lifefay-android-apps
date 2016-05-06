@@ -43,7 +43,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|right"
-        android:background="@drawable/default_blue"
+        android:background="@mipmap/default_orange"
         android:text="Save"
         android:textStyle="bold"
         android:textColor="@color/common_signin_btn_dark_text_default"
