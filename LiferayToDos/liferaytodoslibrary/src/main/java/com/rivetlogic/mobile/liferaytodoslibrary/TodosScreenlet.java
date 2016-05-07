@@ -6,9 +6,11 @@ import android.os.Parcelable;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.liferay.mobile.screens.base.BaseScreenlet;
 import com.liferay.mobile.screens.context.SessionContext;
@@ -186,6 +188,8 @@ public class TodosScreenlet extends BaseScreenlet<TodosViewModel, TodosBaseInter
 
 
     //   ------------------ LISTENER IMPL: action from interactors ------------------------
+
+    //   ------------------ LOAD TASK LIST action ------------------------
     @Override
     public void onLoadToDosSuccess(JSONArray jsonArray) {
         if (_listener != null) {
@@ -221,7 +225,7 @@ public class TodosScreenlet extends BaseScreenlet<TodosViewModel, TodosBaseInter
 
     private void refreshTasks(JSONArray jsonArray) {
         if (mAdapter == null) {
-            mAdapter = new RVAdapter(jsonArray, getContext());
+            mAdapter = new RVAdapter(jsonArray, getContext(), getScreenletId());
         } else {
             mAdapter.setTasks(jsonArray);
         }
@@ -267,8 +271,7 @@ public class TodosScreenlet extends BaseScreenlet<TodosViewModel, TodosBaseInter
                 }
             }
         } catch (JSONException e) {
-            //TODO: handle exc, can't read JSON object
-            e.printStackTrace();
+            Log.e("LiferayToDos", "Exception, can't get/read JSON object for the list of tasks", e);
         }
 
     }
@@ -284,4 +287,37 @@ public class TodosScreenlet extends BaseScreenlet<TodosViewModel, TodosBaseInter
         return cal;
     }
 
+    //   ------------------ SET CHECKBOX CHANGED action ------------------------
+    @Override
+    public void onSetTaskCompletedSuccess(JSONObject jsonObject) {
+        if (_listener != null) {
+            _listener.onSetTaskCompletedSuccess(jsonObject);
+        }
+        Toast.makeText(context,"check action saved",Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onSetTaskCompletedFailure(Exception exception) {
+        getViewModel().showFailedOperation(null, exception);
+        if (_listener != null) {
+            _listener.onSetTaskCompletedFailure(exception);
+        }
+    }
+
+    //   ------------------ UPDATE TASK action ------------------------
+    @Override
+    public void onUpdateTaskSuccess(JSONObject jsonObject) {
+        if (_listener != null) {
+            _listener.onUpdateTaskSuccess(jsonObject);
+        }
+        Toast.makeText(context,"task changes saved",Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onUpdateTaskFailure(Exception exception) {
+        getViewModel().showFailedOperation(null, exception);
+        if (_listener != null) {
+            _listener.onUpdateTaskFailure(exception);
+        }
+    }
 }
