@@ -64,8 +64,8 @@ public class TodosView extends FrameLayout implements TodosViewModel, View.OnCli
             LiferayLogger.e("List of To Dos failed to load", e);
         }
         else {
-            LiferayCrouton.error(getContext(), "Portrait failed to upload", e);
-            LiferayLogger.e("portrait failed to upload", e);
+            LiferayCrouton.error(getContext(), actionName + " operation failed", e);
+            LiferayLogger.e(actionName+" operation failed", e);
         }
     }
 

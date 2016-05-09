@@ -25,5 +25,6 @@
         <item>Past Due</item>
     </string-array>
     <string name="title_activity_task_detail">Task Detail</string>
+    <string name="title_activity_create_task">Create Task</string>
 
 </resources>

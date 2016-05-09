@@ -3,4 +3,7 @@
     <string name="tasks">Tasks</string>
     <string name="no_tasks_for_this_period">No tasks for this period</string>
     <string name="Save">Save</string>
+
+    <string name="title_hint">Title</string>
+    <string name="description_hint">\nDescription\n</string>
 </resources>

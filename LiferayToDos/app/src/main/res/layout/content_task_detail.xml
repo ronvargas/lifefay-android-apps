@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -9,44 +8,14 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    android:scrollbarAlwaysDrawVerticalTrack="true"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="com.rivetlogic.mobile.liferaytodos.TaskDetailActivity"
-    android:orientation="vertical"
     tools:showIn="@layout/activity_task_detail">
 
-    <EditText
-        android:id="@+id/task_title"
+    <com.rivetlogic.mobile.liferaytodoslibrary.TodosTaskDetailScreenlet
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="@dimen/default_edit_text_drawable_padding"
-        android:hint="Title"/>
+        android:id="@+id/liferay_todos_task_detail"
+        app:layoutId="@layout/task_detail_layout"/>
 
-
-    <EditText
-        android:id="@+id/task_description"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="@dimen/default_edit_text_drawable_padding"
-        android:hint="\nDescription\n"/>
-
-    <DatePicker
-        android:datePickerMode="spinner"
-        android:calendarViewShown="false"
-        android:layout_gravity="center_horizontal"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="@dimen/default_edit_text_drawable_padding"
-        />
-
-    <Button android:id="@+id/button_save_task"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|right"
-        android:background="@mipmap/default_blue"
-        android:text="Save"
-        android:textStyle="bold"
-        android:textColor="@color/common_signin_btn_dark_text_default"
-        android:onClick="saveTask" />
-
-</LinearLayout>
+</RelativeLayout>

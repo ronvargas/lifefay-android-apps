@@ -51,7 +51,6 @@ public class TodosScreenlet extends BaseScreenlet<TodosViewModel, TodosBaseInter
     private TodosBaseInteractor singleInteractor;
 
     private TodosListener _listener;
-    private long _userId;
     private Context context;
 
     public TodosScreenlet(Context context) {
@@ -93,28 +92,14 @@ public class TodosScreenlet extends BaseScreenlet<TodosViewModel, TodosBaseInter
         performUserAction(FILTER_PAST_DUE);
     }
 
-    //   ----------------- Getters & Setters -----------------------------
-    public long getUserId() {
-        return _userId;
-    }
-
-    public void setUserId(long userId) {
-        _userId = userId;
-    }
-
-
     //   ------------ BASE SCREENLET: createView, createInteractor, onUserAction ------------
     @Override
     protected View createScreenletView(Context context, AttributeSet attributes) {
         TypedArray typedArray = context.getTheme().obtainStyledAttributes(
-                attributes, R.styleable.UserPortraitScreenlet, 0, 0);
+                attributes, R.styleable.LoginScreenlet, 0, 0);
 
-        _userId = castToLongOrUseDefault(typedArray.getString(R.styleable.UserPortraitScreenlet_userId), 0L);
-        if (SessionContext.hasSession() && SessionContext.getLoggedUser() != null && _userId == 0) {
-            _userId = SessionContext.getLoggedUser().getId();
-        }
 
-        int layoutId = typedArray.getResourceId(R.styleable.UserPortraitScreenlet_layoutId, getDefaultLayoutId());
+        int layoutId = typedArray.getResourceId(R.styleable.LoginScreenlet_layoutId, getDefaultLayoutId());
         typedArray.recycle();
         LayoutInflater inflater = LayoutInflater.from(context);
         return inflater.inflate(layoutId, null, false);
@@ -133,7 +118,7 @@ public class TodosScreenlet extends BaseScreenlet<TodosViewModel, TodosBaseInter
         try {
             if (LOAD_TO_DOS.equals(userActionName)) {
                 TaskByUserIdInteractor taskByUserIdInteractor = (TaskByUserIdInteractor) getInteractor(userActionName);
-                taskByUserIdInteractor.loadTasks(_userId);
+                taskByUserIdInteractor.loadTasks(SessionContext.getLoggedUser().getId());
             } else if (FILTER_DUE_TODAY.equals(userActionName)) {
                 refreshTasks(todayTasks);
             } else if (FILTER_DUE_TOMORROW.equals(userActionName)) {

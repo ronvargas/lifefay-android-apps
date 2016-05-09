@@ -24,7 +24,7 @@
             android:label="@string/title_activity_settings" />
         <activity
             android:name=".TaskDetailActivity"
-            android:label="@string/title_activity_task_detail"
+            android:label="@string/title_activity_create_task"
             android:parentActivityName=".TodosListActivity"
             android:theme="@style/AppTheme">
             <meta-data
